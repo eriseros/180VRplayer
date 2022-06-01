@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Evereal/VRVideoPlayer/Demos/Scenes/VRPlayer.unity
     guid: 16b6180ac60e9a04f9f21d956c3b2003
+  - enabled: 0
+    path: Assets/Oculus/SampleFramework/Usage/Stereo180Video.unity
+    guid: 11cf8fa7bf3deb04db11bd170c0b4338
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 4e3361657732bae439c56c7754339e6a, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 28e0a97ca892bc1408600abf45402ef6, type: 2}

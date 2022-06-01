@@ -3,6 +3,7 @@
 // #define VRVIDEOPLAYER_EASYMOVIETEXTURE
 // #define VRVIDEOPLAYER_AVPROVIDEO
 
+using System.IO;
 using UnityEngine;
 
 namespace Evereal.VRVideoPlayer
@@ -195,10 +196,32 @@ namespace Evereal.VRVideoPlayer
       autoPlay = play;
       if (!string.IsNullOrEmpty(url))
       {
+        print(url+"aaaaaaaaaaaaaaaaaaaaaa");
         videoUrl = url;
-        videoFullPath = Utils.GetFilePath(url, videoSource);
-        mediaPlayer.Load(videoFullPath, play);
+        // videoFullPath = Utils.GetFilePath(url, videoSource);
+        // mediaPlayer.Load(videoFullPath, play);
+        // print("haaaaaaaaaaaaaaaaaaaaaa"+videoFullPath);
+        if (IsUrl(videoUrl))
+        {
+          print(url+"aaaaaaaaaaaaaaabbbbb");
+          mediaPlayer.Load(videoUrl, play);
+        }else if (videoUrl.Contains("/storage"))
+        {
+          print(url+"aaaaaaaaaaaaaaaaccccc");
+          mediaPlayer.Load(videoUrl, play);
+        }
+        else
+        {
+          print("haaaaaaaaaaaaaaaaaaaaaa"+Path.Combine(Application.streamingAssetsPath, videoUrl));
+          mediaPlayer.Load(Path.Combine(Application.streamingAssetsPath, videoUrl), play);
+        }
       }
+    }
+    
+    private bool IsUrl(string movieName)
+    {
+      // if the path contains any url scheme, it is not local
+      return movieName.Contains("://");
     }
 
     // Starts video playback.

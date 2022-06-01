@@ -182,15 +182,25 @@ public class MoviePlayerSample : MonoBehaviour
         Loom.Initialize();
 #if UNITY_EDITOR
         StartRecvDataTimer(true);
-        Play(MovieName);
+        
+        // methodName:方法名  time:方法在time秒后被调用 repeatRate: 被调用后每隔repeatRate秒的频率循环调用
+        // public method InvokeRepeating(methodName: string, time: float, repeatRate: float): void;
+
+        //第一个参数MethodName：被调用的方法名字  time：time秒后被调用
+        Invoke("Play2", 5);
+        // Play(MovieName);
 #else
         jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         jo = jc.GetStatic<AndroidJavaObject>("currentActivity");
         // 由安卓那边调用Play(MovieName)，因为那边要先做一些准备处理，比如解析埋点数据;
-        Play("MovieName");
+        Invoke("Play2", 5);
 #endif
     }
 
+    void Play2()
+    {
+        Play(MovieName);
+    }
 
     void Play(string moviePath, string drmLicencesUrl)
     {
@@ -442,7 +452,7 @@ public class MoviePlayerSample : MonoBehaviour
         // // wait 1 second to start (there is a bug in Unity where starting
         // // the video too soon will cause it to fail to load)
         // yield return new WaitForSeconds(1.0f);
-        print("调用了梁天定义的Play");
+        print("调用了Play");
         MovieName = moviePathOrUrl;
         if (!string.IsNullOrEmpty(MovieName))
         {
